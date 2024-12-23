@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
-import { Colors } from "../Colors";
+import { Colors } from "../../Colors";
 
 const Title = ({title, fontSize = 24})=> {
     return (
@@ -10,7 +10,7 @@ const Title = ({title, fontSize = 24})=> {
 
 const style = StyleSheet.create({
     title: {
-        fontFamily: "inter_bold",
+        fontFamily: "inter_semi_bold",
         color: Colors.OxfordBlue
     }
 })

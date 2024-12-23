@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { Colors } from "../Colors";
+import { Colors } from "../../Colors";
 
 const AppButton = props => {
     return (
