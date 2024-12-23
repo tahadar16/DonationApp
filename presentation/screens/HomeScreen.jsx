@@ -1,13 +1,14 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import globalStyle from "../globalstyle";
+import Title from "../components/Title";
+import AppButton from "../components/Button";
 
 const HomeScreen = ()=> {
     return (
         <View style = {globalStyle.lightfullScreen}>
-            <Text>
-                This is HomeScreen
-            </Text>
+            <Title title={"This is HomeScreen"}/>
+            <AppButton ctaqqqext={"Donate"} ctaAction={()=> {}} />
         </View>
     )
 }

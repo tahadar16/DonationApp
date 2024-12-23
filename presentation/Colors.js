@@ -1,3 +1,5 @@
 export const Colors = {
-    White : "#ffffff"
+    White : "#ffffff",
+    OxfordBlue: "#022150",
+    Crayola: "#2979F2"
 }
