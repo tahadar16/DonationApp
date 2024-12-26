@@ -7,7 +7,7 @@ const AppButton = props => {
     return (
         <TouchableOpacity 
             style = {[style.container, !props.enabled && style.disabled, props.btnStyle]}
-            onPress={props.enabled && props.ctaAction()}
+            onPress={props.enabled && props.ctaAction}
             activeOpacity={0.8}>
                 <Text style = {style.text}>
                     {props.ctaText}
