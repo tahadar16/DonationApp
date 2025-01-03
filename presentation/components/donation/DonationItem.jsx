@@ -29,7 +29,7 @@ const style = StyleSheet.create({
         width: 155,
         resizeMode: "cover",
         borderRadius: 20
-    
+
     },
     infoContainer: {
         paddingTop: 16,
