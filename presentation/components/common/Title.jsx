@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Colors } from "../../Colors";
 
-const Title = ({title, titleStyle})=> {
+const Title = ({title, titleStyle, numberOfLines})=> {
     return (
-        <Text style = {[style.title, titleStyle]}>{title}</Text>
+        <Text numberOfLines={numberOfLines} style = {[style.title, titleStyle]}>{title}</Text>
     )
 }
 
