@@ -1,3 +1,6 @@
 export const Route = {
-    Home : "Home"
+    Home : "Home",
+    Description: "Description",
+    Signup: "Signup",
+    Login: "Login"
 }

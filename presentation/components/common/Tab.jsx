@@ -7,7 +7,7 @@ const Tab = props => {
     return (
         <TouchableOpacity 
             style = {[style.container, !props.selected && style.inActive, !props.enabled && style.disabled, props.btnStyle]}
-            onPress={props.enabled && props.ctaAction()}
+            onPress={() => { props.enabled && props.ctaAction(props.tabId)}}
             activeOpacity={0.8}>
                 <Text style = {[style.text, !props.selected && style.inActiveText]}>
                     {props.ctaText}
@@ -23,11 +23,11 @@ Tab.defaultProps = {
 
 
 PropTypes.Tab = {
+    tabId: PropTypes.number.isRequired,
     ctaText : PropTypes.string.isRequired,
     selected : PropTypes.bool,
     ctaAction : PropTypes.func,
     btnStyle : PropTypes.object
-
 }
 
 const style = StyleSheet.create({

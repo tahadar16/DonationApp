@@ -12,8 +12,8 @@ const DonationItem = props => {
                 <Tag title= {props.tag} />
             </View>
             <View style = {style.infoContainer}>
-                <Title title={props.title} titleStyle={style.title}/>
-                <Title title={props.price} titleStyle = {style.price}/>
+                <Title title={props.title} titleStyle={style.title} numberOfLines={1}/>
+                <Title title={"$ " + props.price} titleStyle = {style.price}/>
             </View>
         </View>
     )
@@ -27,7 +27,9 @@ const style = StyleSheet.create({
     image: {
         height: 170,
         width: 155,
-        resizeMode: "contain"
+        resizeMode: "cover",
+        borderRadius: 20
+
     },
     infoContainer: {
         paddingTop: 16,
