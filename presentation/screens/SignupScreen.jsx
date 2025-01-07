@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pressable, StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import AppButton from "../components/common/Button";
 import globalStyle from "../globalstyle";
 import Title from "../components/common/Title";
@@ -7,23 +7,30 @@ import SafeScreen from "../components/common/SafeScreen";
 import { Colors } from "../Colors";
 import InputField from "../components/common/InputField";
 import Spacer from "../components/common/Spacer";
-import { Route } from "../../navigation/Routes";
-import { loginUser } from "../data/api/user";
-import { userLoggedIn } from "../../redux/reducers/UserSlice";
-import { useDispatch } from "react-redux";
+import Back from "../components/common/Back";
+import { createUser } from "../data/api/user";
 
-const LoginScreen = ({navigation, route}) => {
+const SignupScreen = ({navigation, route}) => {
 
-
+    const [fullname, setFullname] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [success, setSuccess] = useState('');
     const [error, setError] = useState('');
-    const dispatch = useDispatch()
 
     return (
         <SafeScreen style = {globalStyle.lightfullScreen}>
+            <Back ctaAction={()=> navigation.goBack()}/>
                 <View style={style.container}>
-                    <Title title={"Welcome Back"} titleStyle={{marginVertical: 24}}/>
+                    <Title title={"Hello & Welcome!"} titleStyle={{marginVertical: 24}}/>
+                    <InputField 
+                        label={"Fullname"}
+                        placeholder={"Enter your fullname"}
+                        onTextChanged = {(value) => {
+                            console.log(value)
+                            setFullname(value)}}
+                        />
+                    <Spacer height={24}/>
                     <InputField 
                         label={"Email"}
                         placeholder={"Enter your email"}
@@ -40,30 +47,23 @@ const LoginScreen = ({navigation, route}) => {
                         onTextChanged = {(value) => setPassword(value)}/>
                     <Spacer height={24}/>
                     {error.length > 0 && <Text style={style.error}>{error}</Text>}
+                    {success.length > 0 && <Text style={style.success}>{success}</Text>}
                     <AppButton 
-                        ctaText={"Login"}
-                        ctaAction = { async ()=> {
-                            let user = await loginUser(email, password);
-                            if (!user.status) {
-                            setError(user.error);
-                            } else {
-                            setError('');
-                            dispatch(userLoggedIn(user.data))
-                            navigation.navigate(Route.Home);
-                            }
-                        }}
-                      enabled={email.length > 5 && password.length > 7}
-                         />
+                        enabled={
+                            fullname.length >= 2 && email.length >= 5 && password.length >= 8
+                          }
+                        ctaText={"Register"} 
+                        ctaAction = {async () => {
+                            let user = await createUser(fullname, email, password)
+                            if (user.error) {
+                                setError(user.error);
+                              } else {
+                                setError('');
+                                setSuccess('You have successfully registered');
+                                setTimeout(() => navigation.goBack(), 3000);
+                              }
+                        }}/>
                     <Spacer height={13}/>
-                    <Pressable onPress={()=> navigation.navigate(Route.Signup)}>
-                        <Title 
-                            title={"Don't have an account?"} 
-                            titleStyle={{
-                                marginVertical: 24,
-                                color: Colors.Crayola,
-                                fontSize: 16,
-                                textAlign: "center"}}/>
-                    </Pressable>
                 </View>
         </SafeScreen>
     )
@@ -97,10 +97,15 @@ const style = StyleSheet.create({
         width: "100%",
         marginVertical: 12
     },
+    success: {
+        fontFamily: 'Inter',
+        fontSize: 16,
+        color: '#28a745',
+        marginBottom: 24,
+      },
     titleStyle: {
         marginVertical: 8,
-    }
-
+    },
 })
 
-export default LoginScreen
+export default SignupScreen
