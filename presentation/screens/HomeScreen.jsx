@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import globalStyle from "../globalstyle";
 import Title from "../components/common/Title";
 import SearchBar from "../components/search/SearchBar";
@@ -11,6 +11,8 @@ import DonationItem from "../components/donation/DonationItem";
 import { Route } from "../../navigation/Routes";
 import SafeScreen from "../components/common/SafeScreen";
 import { updateSelectedDonationItemId } from "../../redux/reducers/DonationsSlice";
+import { resetToInitialState } from "../../redux/reducers/UserSlice";
+import { logOut } from "../data/api/user";
 
 const HomeScreen = ({navigation})=> {
 
@@ -56,10 +58,19 @@ const HomeScreen = ({navigation})=> {
 							<View style = {style.header}>
 								<View>
 									<Text style= {style.hello}>Hello,</Text>
-									<Title title={user.firstName + " "+ user.lastName + "👋"}/>
+									<Title title={user.displayName + "👋"}/>
 								</View>
-								<Image height={50} width={50}
-								source={{uri: "https://cdn.dribbble.com/users/1577045/screenshots/4914645/media/028d394ffb00cb7a4b2ef9915a384fd9.png?compress=1&resize=400x300&vertical=top"}}/>
+								<View>
+									<Image height={50} width={50}
+									source={{uri: user.profileImage}}/>
+									<Pressable
+									onPress={async () => {
+										dispatch(resetToInitialState());
+										await logOut();
+									}}>
+									<Title title={'Logout'} titleStyle={{fontSize: 16, color: "#156CF7"}} />
+									</Pressable>
+							</View>
 							</View>
 							<SearchBar placeholder={"Search"} onSearch= {()=> {}}/>
 							<Pressable onPress={()=> {}}>
