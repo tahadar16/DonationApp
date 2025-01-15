@@ -2,15 +2,15 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Colors } from "../../Colors";
 
-const InputField = ({label, placeholder, type, onTextChanged}) => {
+const InputField = ({label, placeholder, keywboardType = "default", secureTextEntry = false, onTextChanged}) => {
     return (
         <View>
             <Text style= {style.label}>{label}</Text>
             <TextInput 
                 style= {style.input} 
                 placeholder={placeholder} 
-                secureTextEntry={type === "password"} 
-                keyboardType={type}
+                secureTextEntry={secureTextEntry} 
+                keyboardType={keywboardType}
                 onChangeText={(value)=>onTextChanged(value)}
                 />
         </View>

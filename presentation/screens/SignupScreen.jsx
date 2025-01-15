@@ -4,7 +4,6 @@ import AppButton from "../components/common/Button";
 import globalStyle from "../globalstyle";
 import Title from "../components/common/Title";
 import SafeScreen from "../components/common/SafeScreen";
-import { Colors } from "../Colors";
 import InputField from "../components/common/InputField";
 import Spacer from "../components/common/Spacer";
 import Back from "../components/common/Back";
@@ -43,7 +42,7 @@ const SignupScreen = ({navigation, route}) => {
                     <InputField
                         label={"Password"}
                         placeholder={"Enter your password"} 
-                        type={"password"}
+                        secureTextEntry = {true}
                         onTextChanged = {(value) => setPassword(value)}/>
                     <Spacer height={24}/>
                     {error.length > 0 && <Text style={style.error}>{error}</Text>}
