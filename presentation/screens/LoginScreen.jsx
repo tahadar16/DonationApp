@@ -27,7 +27,7 @@ const LoginScreen = ({navigation, route}) => {
                     <InputField 
                         label={"Email"}
                         placeholder={"Enter your email"}
-                        type={"email-address"}
+                        keywboardType={"email-address"}
                         onTextChanged = {(value) => {
                             console.log(value)
                             setEmail(value)}}
@@ -36,7 +36,7 @@ const LoginScreen = ({navigation, route}) => {
                     <InputField
                         label={"Password"}
                         placeholder={"Enter your password"} 
-                        type={"password"}
+                        secureTextEntry = {true}
                         onTextChanged = {(value) => setPassword(value)}/>
                     <Spacer height={24}/>
                     {error.length > 0 && <Text style={style.error}>{error}</Text>}
